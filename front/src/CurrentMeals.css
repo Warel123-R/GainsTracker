@@ -1,0 +1,41 @@
+.current-meals-container {
+    text-align: center;
+  }
+  
+  .current-meals-container form {
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .current-meals-container label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .current-meals-container input {
+    width: 100px;
+  }
+  
+  .current-meals-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .current-meals-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .alternative-options {
+    margin-top: 20px;
+  }
+  
+  .alternative-options span {
+    margin-right: 10px;
+  }
+  
