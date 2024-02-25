@@ -9,8 +9,8 @@ console.log("3");
 const mongoose = require('mongoose');
 console.log("4");
 
-
-const User = require('../models/User');
+//const User = mongoose.model('users');
+User = require('../models/User');
 console.log("5");
 
 
@@ -34,19 +34,20 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback',
     proxy: true
-}, async (accessToken, refreshToken, profile, done)=>{
-    const existingUser = await User.findOne({googleId: profile.id})
+}, async (accessToken, refreshToken, profile, done) => {
+    const existingUser = await User.findOne({googleId: profile.id});
+    //console.log(profile.id);
     if(existingUser){
-        // console.log("Now we are here");
-        // console.log("searching through users in google strategy");
+         console.log("Now we are here");
+        console.log("searching through users in google strategy");
         //we already have a record with the given profile ID
         return done(null, existingUser);
     }
     
-    //console.log("this user does not exist");
+    console.log("this user does not exist");
     //we don't have a user record with this ID. Make a new record
     const user = await new User({googleId: profile.id}).save();
     done(null, user);
     
-    
 }));
+

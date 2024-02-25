@@ -67,7 +67,7 @@ const users = [
       res.status(401).json({ error: 'User not logged in' });
     }
   });
-  
+
 
 app.listen(5004, () => {
   console.log(`Server is running on http://localhost:${5004}`);

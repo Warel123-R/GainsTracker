@@ -1,8 +1,17 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import App from './App';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import {thunk} from 'redux-thunk';
+
+import axios from 'axios';
+window.axios= axios;
+
 
 const el = document.getElementById('root');
-const root = createRoot(el);
+const root = ReactDOM.createRoot(el);
 
-root.render(<App />);
+root.render(
+    <App></App>
+)
