@@ -1,9 +1,10 @@
 import cv2
-
-import json
 import openfoodfacts
 
+import json
 import requests
+
+from time import sleep
 
 url = "http://localhost:5004/nutrients"
 # https://github.com/openfoodfacts/openfoodfacts-python
@@ -44,10 +45,20 @@ def fill_null(dic, key):
         dic[key] = None
 
 code = readFrame()
+
+good_barcode = False
+while not good_barcode:
+    print("Searching for barcode...")
+    try:
+        product = api.product.get(code, fields=["product_name", "quantity", "nutriments", "nutrition_data_per", "nutrition_data_prepared_per"])
+        good_barcode = True
+    except requests.exceptions.HTTPError:
+        sleep(1)
+        code = readFrame()
+
 cap.release()
 cv2.destroyAllWindows()
 
-product = api.product.get(code, fields=["product_name", "quantity", "nutriments", "nutrition_data_per", "nutrition_data_prepared_per"])
 product = product["product"]
 
 fields = ["quantity", "nutrition_data_per", "nutrition_data_prepared_per"]
@@ -62,6 +73,8 @@ product["nutriments"] = {nutrient: product["nutriments"][nutrient] for nutrient 
 
 print(json.dumps(product, sort_keys=True, indent=4))
 
-x = requests.post(url, json = product)
+x = requests.post(url, json = product, headers = {
+    "Content-Type": "application/json"
+})
 print(x.text)
 # weight = product["packaging_text"]

@@ -35,6 +35,13 @@ function CurrentMeals(){
         );
     };
 
+    const takePicture = async (event) => {
+        event.preventDefault();
+        console.log('Taking picture');
+
+        await axios.post('http://localhost:5004/takePicture', {name: 'String'});
+    }
+
     return (
         <div>
             <h2>Log Your Current Meal</h2>
@@ -66,7 +73,7 @@ function CurrentMeals(){
                 <button type="submit">Submit</button>
             </form>
             <div>Or</div>
-            <button>Take a picture!</button>
+            <button onClick={takePicture}>Take a picture!</button>
         </div>
     );
 };
