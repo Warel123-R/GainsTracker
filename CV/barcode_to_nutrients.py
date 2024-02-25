@@ -48,7 +48,7 @@ code = readFrame()
 
 good_barcode = False
 while not good_barcode:
-    print("Searching for barcode...")
+    #print("Searching for barcode...")
     try:
         product = api.product.get(code, fields=["product_name", "quantity", "nutriments", "nutrition_data_per", "nutrition_data_prepared_per"])
         good_barcode = True
@@ -71,10 +71,11 @@ for nutrient in nutrients:
 
 product["nutriments"] = {nutrient: product["nutriments"][nutrient] for nutrient in nutrients}
 
-print(json.dumps(product, sort_keys=True, indent=4))
+print(product)
+#print(json.dumps(product, sort_keys=True, indent=4))
 
-x = requests.post(url, json = product, headers = {
-    "Content-Type": "application/json"
-})
-print(x.text)
+# x = requests.post(url, json = product, headers = {
+#     "Content-Type": "application/json"
+# })
+#print(x.text)
 # weight = product["packaging_text"]

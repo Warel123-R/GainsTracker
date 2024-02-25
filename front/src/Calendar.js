@@ -1,25 +1,51 @@
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import React, { useState } from 'react';
-
-function Calendar2(){
+import React, { useState, useEffect} from 'react';
+import axios from 'axios';
+function Calendar2({setDate, date, curridgiven}){
     // State to store selected date and past meal data
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [pastMeals, setPastMeals] = useState([
-        { date: '2024-02-22', calories: 300, protein: 25, carbs: 40, fat: 15, name: 'Granola'},
-        { date: '2024-02-23', calories: 350, protein: 30, carbs: 45, fat: 17, name: 'Chips' },
-        // Add more past meal data as needed
-    ]);
+    const [pastMeals, setPastMeals] = useState([]);
 
-    const handleDateClick = (date) => {
-        setSelectedDate(date);
+    const handleDateClick = (dategiven) => {
+        setSelectedDate(dategiven);
+        setDate(dategiven);
     };
-
-    // Filter past meals for the selected date
     const mealsForSelectedDate = pastMeals.filter((meal) => {
         const mealDate = new Date(meal.date);
         return mealDate.toDateString() === selectedDate.toDateString();
     });
+
+    useEffect(() => {
+        const fetchUserFoods = async () => {
+          try {
+            const response = await axios.get('http://localhost:5004/api/userfoods', {
+              params: {
+                id: curridgiven,
+                date: date
+              }
+            });
+            const meals = response.data.map(foodString => {
+                const validJsonString = foodString.replace(/'/g, '"').replace(/None/g, 'null');
+                const data = JSON.parse(validJsonString);
+                return {
+                  name: data.product_name,
+                  date: selectedDate.toDateString(),
+                  calories: data.nutriments['energy-kcal'],
+                  protein: data.nutriments.proteins,
+                  carbs: data.nutriments.carbohydrates,
+                  fat: data.nutriments['saturated-fat']
+                };
+              });
+            
+            setPastMeals(meals);
+
+          } catch (error) {
+            console.error('Error fetching user foods:', error);
+          }
+        };
+        fetchUserFoods();
+    }, [date]);
 
     return (
         <div>

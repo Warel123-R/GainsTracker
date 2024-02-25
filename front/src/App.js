@@ -7,6 +7,9 @@ const App = () => {
     const [isloggedin, setIsLoggedIn]= useState(false);
     const [onlyOnce, setOnlyOnce] = useState(false);
     const [googleId, setGoogleId] = useState(null);
+    const [date, setDate] = useState(new Date());
+    const [refresh, setRefresh] = useState(1);
+
     useEffect(() => {
         // Function to parse URL and extract query parameters
         const getQueryParam = (name) => {
@@ -30,7 +33,7 @@ const App = () => {
     return (
         <div>
             {isloggedin ? <div/>:<Login/>}
-            {isloggedin ? <CheckOther/>: <div></div>}
+            {isloggedin ? <CheckOther curridgiven={googleId} date={date} setDate={setDate} setRefresh={setRefresh} refresh={refresh}/>: <div></div>}
         </div>
     );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function CurrentMeals(){
+function CurrentMeals({curridgiven, date, setRefresh, refresh}){
     // State to store current meal data
     const [currentMeal, setCurrentMeal] = useState({
         calories: '',
@@ -38,8 +38,9 @@ function CurrentMeals(){
     const takePicture = async (event) => {
         event.preventDefault();
         console.log('Taking picture');
-
-        await axios.post('http://localhost:5004/takePicture', {name: 'String'});
+        console.log(curridgiven);
+        await axios.post('http://localhost:5004/takePicture', {id: curridgiven, date: date});
+        //setRefresh(refresh+1);
     }
 
     return (
