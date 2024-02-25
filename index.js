@@ -83,26 +83,6 @@ app.post('/takePicture', (req, res) => {
     if (err) {
       reject(err);
     } else {
-      //console.log("THIS IS WHERE I AM RN");
-      // const validJsonString = outsidemess.replace(/'/g, '"').replace(/None/g, 'null');
-      // //console.log(validJsonString);
-      // const data = JSON.parse(validJsonString);
-      // //console.log(data);
-      // // Access the values
-      // const productName = data.product_name;
-      // const quantity = data.quantity;
-      // const nutriments = data.nutriments;
-      // const carbohydrates = nutriments.carbohydrates;
-      // const proteins = nutriments.proteins;
-      // const sodium = nutriments.sodium;
-      // const energyKcal = nutriments['energy-kcal'];
-      // const saturatedFat = nutriments['saturated-fat'];
-      // const nutritionDataPer = data.nutrition_data_per;
-      // const nutritionDataPreparedPer = data.nutrition_data_prepared_per;
-      //  console.log(productName);
-      // console.log(quantity);
-      // console.log(nutriments);
-
       addFoodsToUser(req.body.id, outsidemess, req.body.date);
 
     }
@@ -130,16 +110,6 @@ app.get('/api/userfoods', async (req, res) => {
     if (!userFoods || userFoods.length === 0) {
       return res.json([]);
     }
-    // console.log("I AM HERE");
-    // console.log("I AM HERE");
-
-    // console.log("I AM HERE");
-    // console.log("I AM HERE");
-    // console.log("I AM HERE");
-    // console.log("I AM HERE");
-    // console.log("I AM HERE");
-    // console.log("I AM HERE");
-    // console.log("I AM HERE");
 
     console.log(userFoods);
     const foods = userFoods.map(food => food.foods); // Extract the foods array from each document
@@ -150,6 +120,39 @@ app.get('/api/userfoods', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
   });
+
+
+ app.post('/Manual', async (req, res) => {
+    try {
+      const inputObject = req.body.currMeal;
+      const nutriments = {
+        carbohydrates: parseFloat(inputObject.carbs) || null,
+        proteins: parseFloat(inputObject.protein) || null,
+        sodium: null, // Add your own value if available
+        'energy-kcal': parseFloat(inputObject.calories) || null,
+        'saturated-fat': parseFloat(inputObject.fat) || null
+      };
+      
+      // Create the object with the desired structure
+      const resultObject = {
+        nutriments,
+        nutrition_data_per: '100g',
+        nutrition_data_prepared_per: '100g',
+        product_name: inputObject.name,
+        quantity: null // Assuming quantity is not provided in the input
+      };
+      
+      // Convert the object to a JSON string
+      const jsonString = JSON.stringify(resultObject);
+      console.log(jsonString);
+      console.log("pranavja is jere");
+      addFoodsToUser(req.body.id, jsonString, req.body.date);
+
+    } catch (error) {
+      console.error('Error fetching user foods:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+    });
 
 
 app.listen(5004, () => {

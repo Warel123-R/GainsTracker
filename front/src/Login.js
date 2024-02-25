@@ -1,4 +1,5 @@
 import React from 'react';
+import './Login.css'; // Import the CSS file
 
 const Login = () => {
   const handleGoogleLogin = () => {
@@ -6,8 +7,8 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleGoogleLogin}>Sign in with Google</button>
+    <div className="container"> {/* Add a container class */}
+      <button className="button" onClick={handleGoogleLogin}>Sign in with Google</button> {/* Add a button class */}
     </div>
   );
 };

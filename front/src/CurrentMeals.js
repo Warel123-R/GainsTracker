@@ -1,5 +1,7 @@
+// CurrentMeals.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import './currentMeals_style.css';
 
 function CurrentMeals({curridgiven, date, setRefresh, refresh}){
     // State to store current meal data
@@ -20,19 +22,29 @@ function CurrentMeals({curridgiven, date, setRefresh, refresh}){
         event.preventDefault();
         // Handle submitting current meal data here, e.g., send to backend
         console.log('Submitted:', currentMeal);
+        setRefresh(refresh+1);
+        console.log(refresh);
+
+        
         // Reset form fields after submission
+        
+        await axios.post('http://localhost:5004/Manual', {id: curridgiven, date: date, currMeal: currentMeal});
+
+
         setCurrentMeal({
             calories: '',
             protein: '',
             carbs: '',
             fat: '',
+            name: ''
         });
 
-        await axios.post('http://localhost:5004/newItem',
-            {
-                name: 'String'
-            }
-        );
+        
+
+        // Add the new meal to the list
+        //addMeal(currentMeal);
+
+        // await axios.post('http://localhost:5004/newItem', { name: 'String' });
     };
 
     const takePicture = async (event) => {
@@ -67,15 +79,13 @@ function CurrentMeals({curridgiven, date, setRefresh, refresh}){
                     Carbs (g):
                     <input type="number" name="carbs" value={currentMeal.carbs} onChange={handleChange} />
                 </label>
-                <label>
-                    Fat (g):
-                    <input type="number" name="fat" value={currentMeal.fat} onChange={handleChange} />
-                </label>
+                <br />
                 <button type="submit">Submit</button>
             </form>
             <div>Or</div>
             <button onClick={takePicture}>Take a picture!</button>
         </div>
     );
-};
+}
+
 export default CurrentMeals;
