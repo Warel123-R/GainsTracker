@@ -9,6 +9,7 @@ require('./services/passport');
 console.log('here3');
 mongoose.connect(keys.mongoURI);
 
+const PythonShell = require('python-shell');
 
 
 const app = express();
@@ -74,6 +75,13 @@ app.post('/nutrients', (req, res) => {
   res.status(201).send('Nutrients received successfully');
 });
 
+app.post('/takePicture', (req, res) => {
+  console.log("Taking picture");
+  var pyshell = new PythonShell('CV/barcode_to_nutrients.py');
+  pyshell.on('message', function (message) {
+    console.log(message);
+  });
+})
 
 app.listen(5004, () => {
   console.log(`Server is running on http://localhost:${5004}`);
