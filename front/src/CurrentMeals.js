@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './currentMeals_style.css';
 
-function CurrentMeals({curridgiven, date, setRefresh, refresh}){
+function CurrentMeals({curridgiven, date, setRefresh, refresh, setDate}){
     // State to store current meal data
     const [currentMeal, setCurrentMeal] = useState({
         calories: '',
@@ -22,8 +22,6 @@ function CurrentMeals({curridgiven, date, setRefresh, refresh}){
         event.preventDefault();
         // Handle submitting current meal data here, e.g., send to backend
         console.log('Submitted:', currentMeal);
-        setRefresh(refresh+1);
-        console.log(refresh);
 
         
         // Reset form fields after submission

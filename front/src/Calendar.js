@@ -11,6 +11,7 @@ function Calendar2({setDate, date, curridgiven, refresh}){
     const handleDateClick = (dategiven) => {
         setSelectedDate(dategiven);
         setDate(dategiven);
+        setCurrentMealIndex(0);
     };
     
 

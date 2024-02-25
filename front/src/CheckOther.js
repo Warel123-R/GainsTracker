@@ -10,7 +10,7 @@ function CheckOther({curridgiven, setDate, date, setRefresh, refresh}){
              <h1 style={{ marginBottom: '20px', color: '#4CAF50' }}>NutriHub</h1>
             <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', minHeight: '100vh' }}>
             <Calendar2 setDate={setDate} date={date} curridgiven={curridgiven} refresh={refresh}/>
-            <CurrentMeals curridgiven={curridgiven} date={date} setRefresh={setRefresh} refresh={refresh}/>
+            <CurrentMeals curridgiven={curridgiven} date={date} setDate={setDate} setRefresh={setRefresh} refresh={refresh}/>
         </div>
         </div>
     )
