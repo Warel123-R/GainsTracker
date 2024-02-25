@@ -6,7 +6,8 @@
     "mongoose": "^8.2.0",
     "passport": "^0.5.3",
     "passport-google-oauth20": "^2.0.0",
-    "python-shell": "^5.0.0"
+    "python-shell": "^5.0.0",
+    "react-redux": "^9.1.0"
   },
   "name": "gainstracker",
   "description": "",
