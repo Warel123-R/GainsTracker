@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors')
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
@@ -9,10 +10,12 @@ require('./services/passport');
 console.log('here3');
 mongoose.connect(keys.mongoURI);
 
-const PythonShell = require('python-shell');
+const {PythonShell} = require('python-shell');
 
 
 const app = express();
+app.use(cors())
+
 app.use(bodyParser.json());
 
 app.use(cookieSession({
