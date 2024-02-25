@@ -1,0 +1,78 @@
+/* currentMeals_style.css */
+
+/* Container styles */
+.current-meals-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9; /* Light gray background */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Form styles */
+.meal-form {
+  margin-top: 20px;
+}
+
+.meal-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.meal-form input[type='text'],
+.meal-form input[type='number'] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Button styles */
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #007bff; /* Blue */
+  color: #ccc;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Or divider style */
+.or-divider {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Ensure dates are clear and legible */
+.date {
+  /* border: 0; */
+  padding: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: 600;
+  /* border: 2px solid transparent; */
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* Remove or adjust the faded class */
+/*
+.faded {
+    color: var(--c-text-secondary);
+}
+*/

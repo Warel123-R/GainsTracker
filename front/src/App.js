@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import './CurrentMeals.css';
+import './currentMeals_style.css';
 import Login from './Login';
 import CheckOther from './CheckOther';
 

@@ -1,7 +1,9 @@
+// CurrentMeals.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import './currentMeals_style.css';
 
-function CurrentMeals(){
+function CurrentMeals({ addMeal }) {
     // State to store current meal data
     const [currentMeal, setCurrentMeal] = useState({
         calories: '',
@@ -26,21 +28,21 @@ function CurrentMeals(){
             protein: '',
             carbs: '',
             fat: '',
+            name: ''
         });
 
-        await axios.post('http://localhost:5004/newItem',
-            {
-                name: 'String'
-            }
-        );
+        // Add the new meal to the list
+        addMeal(currentMeal);
+
+        // await axios.post('http://localhost:5004/newItem', { name: 'String' });
     };
 
     const takePicture = async (event) => {
         event.preventDefault();
         console.log('Taking picture');
 
-        await axios.post('http://localhost:5004/takePicture', {name: 'String'});
-    }
+        await axios.post('http://localhost:5004/takePicture', { name: 'String' });
+    };
 
     return (
         <div>
@@ -66,15 +68,13 @@ function CurrentMeals(){
                     Carbs (g):
                     <input type="number" name="carbs" value={currentMeal.carbs} onChange={handleChange} />
                 </label>
-                <label>
-                    Fat (g):
-                    <input type="number" name="fat" value={currentMeal.fat} onChange={handleChange} />
-                </label>
+                <br />
                 <button type="submit">Submit</button>
             </form>
             <div>Or</div>
             <button onClick={takePicture}>Take a picture!</button>
         </div>
     );
-};
+}
+
 export default CurrentMeals;

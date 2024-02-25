@@ -1,0 +1,39 @@
+/* style.css */
+
+/* Reset margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Container styles */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #7f8c8d, #bdc3c7);
+  }
+  
+  /* Button styles */
+  .button {
+    margin: 0; /* Remove default margin */
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Logo styles */
+  .logo {
+    margin-bottom: 20px;
+  }
+  
